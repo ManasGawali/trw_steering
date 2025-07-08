@@ -40,7 +40,7 @@ const MachineCard = ({ machine }) => {
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-gray-50 rounded-lg p-3">
           <p className="text-sm text-gray-600">Efficiency</p>
-          <p className="text-xl font-bold text-gray-900">{machine.efficiency}%</p>
+          <p className="text-xl font-bold text-gray-900">{Math.round(machine.efficiency)}%</p>
           <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
             <div 
               className="bg-blue-600 h-2 rounded-full transition-all duration-500"
@@ -51,7 +51,7 @@ const MachineCard = ({ machine }) => {
         
         <div className="bg-gray-50 rounded-lg p-3">
           <p className="text-sm text-gray-600">Production</p>
-          <p className="text-xl font-bold text-gray-900">{machine.production}</p>
+          <p className="text-xl font-bold text-gray-900">{Math.round(machine.production)}</p>
           <p className="text-xs text-gray-500 mt-1">units/hour</p>
         </div>
       </div>
