@@ -26,10 +26,15 @@ const ReportGenerator = ({ machineData, productionData, logs, totalProduction, a
       
       // Convert to canvas
       const canvas = await html2canvas(reportElement, {
-        scale: 2,
+        scale: 1.5,
         useCORS: true,
         allowTaint: true,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        logging: false,
+        width: 800,
+        height: reportElement.scrollHeight,
+        windowWidth: 800,
+        windowHeight: reportElement.scrollHeight
       });
       
       // Create PDF
@@ -131,21 +136,21 @@ const ReportGenerator = ({ machineData, productionData, logs, totalProduction, a
             Machine Status Overview
           </h2>
           <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px;">
-            <div style="text-align: center; padding: 15px; background: #ECFDF5; border-radius: 8px;">
+            <div style="text-align: center; padding: 20px; background: #ECFDF5; border-radius: 12px; border: 2px solid #10B981; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
               <p style="color: #10B981; font-size: 18px; font-weight: bold; margin: 0 0 5px 0;">${runningMachines}</p>
-              <p style="color: #065F46; font-size: 12px; margin: 0;">Running</p>
+              <p style="color: #065F46; font-size: 12px; font-weight: 600; margin: 0; text-transform: uppercase; letter-spacing: 0.5px;">Running</p>
             </div>
-            <div style="text-align: center; padding: 15px; background: #FFFBEB; border-radius: 8px;">
+            <div style="text-align: center; padding: 20px; background: #FFFBEB; border-radius: 12px; border: 2px solid #F59E0B; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
               <p style="color: #F59E0B; font-size: 18px; font-weight: bold; margin: 0 0 5px 0;">${idleMachines}</p>
-              <p style="color: #92400E; font-size: 12px; margin: 0;">Idle</p>
+              <p style="color: #92400E; font-size: 12px; font-weight: 600; margin: 0; text-transform: uppercase; letter-spacing: 0.5px;">Idle</p>
             </div>
-            <div style="text-align: center; padding: 15px; background: #EFF6FF; border-radius: 8px;">
+            <div style="text-align: center; padding: 20px; background: #EFF6FF; border-radius: 12px; border: 2px solid #3B82F6; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
               <p style="color: #3B82F6; font-size: 18px; font-weight: bold; margin: 0 0 5px 0;">${maintenanceMachines}</p>
-              <p style="color: #1E40AF; font-size: 12px; margin: 0;">Maintenance</p>
+              <p style="color: #1E40AF; font-size: 12px; font-weight: 600; margin: 0; text-transform: uppercase; letter-spacing: 0.5px;">Maintenance</p>
             </div>
-            <div style="text-align: center; padding: 15px; background: #FEF2F2; border-radius: 8px;">
+            <div style="text-align: center; padding: 20px; background: #FEF2F2; border-radius: 12px; border: 2px solid #EF4444; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
               <p style="color: #EF4444; font-size: 18px; font-weight: bold; margin: 0 0 5px 0;">${errorMachines}</p>
-              <p style="color: #991B1B; font-size: 12px; margin: 0;">Error</p>
+              <p style="color: #991B1B; font-size: 12px; font-weight: 600; margin: 0; text-transform: uppercase; letter-spacing: 0.5px;">Error</p>
             </div>
           </div>
         </div>
@@ -157,21 +162,21 @@ const ReportGenerator = ({ machineData, productionData, logs, totalProduction, a
           </h2>
           <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
             <thead>
-              <tr style="background: #F9FAFB;">
-                <th style="padding: 12px; text-align: left; font-size: 12px; font-weight: 600; color: #374151; border-bottom: 1px solid #E5E7EB;">Machine</th>
-                <th style="padding: 12px; text-align: left; font-size: 12px; font-weight: 600; color: #374151; border-bottom: 1px solid #E5E7EB;">Status</th>
-                <th style="padding: 12px; text-align: right; font-size: 12px; font-weight: 600; color: #374151; border-bottom: 1px solid #E5E7EB;">Efficiency</th>
-                <th style="padding: 12px; text-align: right; font-size: 12px; font-weight: 600; color: #374151; border-bottom: 1px solid #E5E7EB;">Production</th>
+              <tr style="background: #F9FAFB; border-bottom: 2px solid #E5E7EB;">
+                <th style="padding: 16px 12px; text-align: left; font-size: 13px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.5px;">Machine</th>
+                <th style="padding: 16px 12px; text-align: center; font-size: 13px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.5px;">Status</th>
+                <th style="padding: 16px 12px; text-align: right; font-size: 13px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.5px;">Efficiency</th>
+                <th style="padding: 16px 12px; text-align: right; font-size: 13px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.5px;">Production</th>
               </tr>
             </thead>
             <tbody>
               ${machineData.map((machine, index) => `
-                <tr style="border-bottom: 1px solid #F3F4F6;">
-                  <td style="padding: 12px; font-size: 14px; color: #1F2937;">
+                <tr style="border-bottom: 1px solid #F3F4F6; ${index % 2 === 0 ? 'background: #FAFAFA;' : 'background: white;'}">
+                  <td style="padding: 16px 12px; font-size: 14px; color: #1F2937;">
                     <strong>${machine.name}</strong><br>
                     <span style="color: #6B7280; font-size: 12px;">${machine.id}</span>
                   </td>
-                  <td style="padding: 12px;">
+                  <td style="padding: 16px 12px; text-align: center;">
                     <span style="padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 500; color: white; background: ${
                       machine.status === 'running' ? '#10B981' :
                       machine.status === 'idle' ? '#F59E0B' :
@@ -180,10 +185,10 @@ const ReportGenerator = ({ machineData, productionData, logs, totalProduction, a
                       ${machine.status.charAt(0).toUpperCase() + machine.status.slice(1)}
                     </span>
                   </td>
-                  <td style="padding: 12px; text-align: right; font-size: 14px; font-weight: 600; color: #1F2937;">
+                  <td style="padding: 16px 12px; text-align: right; font-size: 14px; font-weight: 600; color: #1F2937;">
                     ${Math.round(machine.efficiency)}%
                   </td>
-                  <td style="padding: 12px; text-align: right; font-size: 14px; font-weight: 600; color: #1F2937;">
+                  <td style="padding: 16px 12px; text-align: right; font-size: 14px; font-weight: 600; color: #1F2937;">
                     ${Math.round(machine.production)} units/h
                   </td>
                 </tr>
